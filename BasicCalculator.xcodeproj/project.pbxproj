@@ -14,6 +14,7 @@
 		757254431F287148000807DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 757254411F287148000807DC /* LaunchScreen.storyboard */; };
 		7572544E1F287148000807DC /* BasicCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572544D1F287148000807DC /* BasicCalculatorTests.swift */; };
 		757254591F287148000807DC /* BasicCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757254581F287148000807DC /* BasicCalculatorUITests.swift */; };
+		757254681F28BE52000807DC /* BasicCalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757254671F28BE52000807DC /* BasicCalculatorBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		757254541F287148000807DC /* BasicCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		757254581F287148000807DC /* BasicCalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCalculatorUITests.swift; sourceTree = "<group>"; };
 		7572545A1F287148000807DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		757254671F28BE52000807DC /* BasicCalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicCalculatorBrain.swift; path = BasicCalculator/BasicCalculatorBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		7572542C1F287148000807DC = {
 			isa = PBXGroup;
 			children = (
+				757254671F28BE52000807DC /* BasicCalculatorBrain.swift */,
 				757254371F287148000807DC /* BasicCalculator */,
 				7572544C1F287148000807DC /* BasicCalculatorTests */,
 				757254571F287148000807DC /* BasicCalculatorUITests */,
@@ -97,12 +100,9 @@
 		757254371F287148000807DC /* BasicCalculator */ = {
 			isa = PBXGroup;
 			children = (
-				757254381F287148000807DC /* AppDelegate.swift */,
+				757254661F28715B000807DC /* SupportingFiles */,
 				7572543A1F287148000807DC /* ViewController.swift */,
 				7572543C1F287148000807DC /* Main.storyboard */,
-				7572543F1F287148000807DC /* Assets.xcassets */,
-				757254411F287148000807DC /* LaunchScreen.storyboard */,
-				757254441F287148000807DC /* Info.plist */,
 			);
 			path = BasicCalculator;
 			sourceTree = "<group>";
@@ -123,6 +123,17 @@
 				7572545A1F287148000807DC /* Info.plist */,
 			);
 			path = BasicCalculatorUITests;
+			sourceTree = "<group>";
+		};
+		757254661F28715B000807DC /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				757254441F287148000807DC /* Info.plist */,
+				757254411F287148000807DC /* LaunchScreen.storyboard */,
+				7572543F1F287148000807DC /* Assets.xcassets */,
+				757254381F287148000807DC /* AppDelegate.swift */,
+			);
+			name = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7572543B1F287148000807DC /* ViewController.swift in Sources */,
+				757254681F28BE52000807DC /* BasicCalculatorBrain.swift in Sources */,
 				757254391F287148000807DC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
