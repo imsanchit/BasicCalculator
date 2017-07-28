@@ -84,7 +84,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNF-lp-ECp">
                                                         <rect key="frame" x="0.0" y="0.0" width="93.5" height="123.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                                        <state key="normal" title="&lt;-"/>
+                                                        <state key="normal" title="√"/>
                                                         <connections>
                                                             <action selector="performOperations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RVS-qh-kCX"/>
                                                         </connections>

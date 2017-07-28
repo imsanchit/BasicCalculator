@@ -12,6 +12,8 @@ struct BasicCalculatorBrain {
     private var accumulator: Double?
     private var operation: String?
     
+
+    
     mutating func performOperation(_ operand: String , _ symbol: String) {
     
     switch symbol {
@@ -39,21 +41,28 @@ struct BasicCalculatorBrain {
             }
             accumulator = Double(operand)
             operation = symbol
-        case "=":
-            if(operation == "+") {
-                accumulator = accumulator! + Double(operand)!
-                print(accumulator!)
-            }   else if(operation == "-") {
-                accumulator = accumulator! - Double(operand)!
-                print(accumulator!)
-            }  else if(operation == "*") {
-                accumulator = accumulator! * Double(operand)!
-                print(accumulator!)
-            }  else if(operation == "/") {
-                accumulator = accumulator! / Double(operand)!
-                print(accumulator!)
+        
+        case "√":
+            if let acc = accumulator {
+                accumulator = acc / Double(operand)!
             }
-            accumulator = Double(round(10000000000000*accumulator!)/10000000000000)
+            accumulator = Double(operand)
+            operation = symbol
+        case "=":
+                if(operation == "+") {
+                    accumulator = accumulator! + Double(operand)!
+                    print(accumulator!)
+                }   else if(operation == "-") {
+                    accumulator = accumulator! - Double(operand)!
+                    print(accumulator!)
+                }  else if(operation == "*") {
+                    accumulator = accumulator! * Double(operand)!
+                    print(accumulator!)
+                }  else if(operation == "/") {
+                    accumulator = accumulator! / Double(operand)!
+                    print(accumulator!)
+                }
+                accumulator = Double(round(10000000000000*accumulator!)/10000000000000)
         default:
             break
         }

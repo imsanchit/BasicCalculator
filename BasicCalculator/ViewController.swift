@@ -24,12 +24,21 @@ class ViewController: UIViewController {
                 displayScreen.text = displayScreen.text! + sender.currentTitle!
                 isUserTyping = false
                 firstDecimal = true
+            case "AC":
+                isUserTyping = false
+                firstDecimal = true
+                displayScreen.text = ""
             
-        case "AC":
-            isUserTyping = false
-            firstDecimal = true
-            displayScreen.text = ""
-        case "<-":
+            case "√":
+//                guard let operand = extractOperandFrom(text: displayScreen.text) else { return }
+//                basicCalculatorBrain.performOperation(operand, sender.currentTitle!)
+                let operand = displayScreen.text!
+                basicCalculatorBrain.performOperation(operand, sender.currentTitle!)
+                displayScreen.text = String(sqrt(Double(operand)!))
+                
+                isUserTyping = false
+                firstDecimal = false
+/*        case "<-":
             if var text = displayScreen.text {
                 if(text != "") {
                     let index = text.index(before: text.endIndex)
@@ -43,17 +52,16 @@ class ViewController: UIViewController {
                     }
                 }
             }
-        case "=":
-            guard let operand = extractOperandFrom(text: displayScreen.text) else { return }
-            basicCalculatorBrain.performOperation(operand, sender.currentTitle!)
+  */        case "=":
+                guard let operand = extractOperandFrom(text: displayScreen.text) else { return }
+                basicCalculatorBrain.performOperation(operand, sender.currentTitle!)
             
-            if(basicCalculatorBrain.result != nil) {
-                displayScreen.text = String(basicCalculatorBrain.result!)
-                firstDecimal=false
-            }
-            
-        default:
-            break
+                if(basicCalculatorBrain.result != nil) {
+                    displayScreen.text = String(basicCalculatorBrain.result!)
+                    firstDecimal=false
+                }
+            default:
+                break
         }
     }
 

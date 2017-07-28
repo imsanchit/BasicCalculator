@@ -48,7 +48,7 @@
 		757254541F287148000807DC /* BasicCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		757254581F287148000807DC /* BasicCalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCalculatorUITests.swift; sourceTree = "<group>"; };
 		7572545A1F287148000807DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		757254671F28BE52000807DC /* BasicCalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicCalculatorBrain.swift; path = BasicCalculator/BasicCalculatorBrain.swift; sourceTree = "<group>"; };
+		757254671F28BE52000807DC /* BasicCalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCalculatorBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +79,6 @@
 		7572542C1F287148000807DC = {
 			isa = PBXGroup;
 			children = (
-				757254671F28BE52000807DC /* BasicCalculatorBrain.swift */,
 				757254371F287148000807DC /* BasicCalculator */,
 				7572544C1F287148000807DC /* BasicCalculatorTests */,
 				757254571F287148000807DC /* BasicCalculatorUITests */,
@@ -100,9 +99,10 @@
 		757254371F287148000807DC /* BasicCalculator */ = {
 			isa = PBXGroup;
 			children = (
-				757254661F28715B000807DC /* SupportingFiles */,
+				757254671F28BE52000807DC /* BasicCalculatorBrain.swift */,
 				7572543A1F287148000807DC /* ViewController.swift */,
 				7572543C1F287148000807DC /* Main.storyboard */,
+				757254661F28715B000807DC /* SupportingFiles */,
 			);
 			path = BasicCalculator;
 			sourceTree = "<group>";
@@ -519,6 +519,7 @@
 				7572545F1F287148000807DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		757254601F287148000807DC /* Build configuration list for PBXNativeTarget "BasicCalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +528,7 @@
 				757254621F287148000807DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		757254631F287148000807DC /* Build configuration list for PBXNativeTarget "BasicCalculatorUITests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +537,7 @@
 				757254651F287148000807DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
