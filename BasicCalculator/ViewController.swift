@@ -15,30 +15,60 @@ class ViewController: UIViewController {
     var firstDecimal: Bool = true
     @IBOutlet weak var displayScreen: UITextView!
     
+    var isResultPending : Bool = false
+    var desc = ""
+//    var recentEqual //: Bool = true
+   /* var recentEqual :Bool {
+        get {
+            return false
+        }
+        set {
+            isUserTyping = false
+            firstDecimal = true
+            displayScreen.text = ""
+            operationsDisplay.text = ""
+            basicCalculatorBrain.result = 0
+            
+        }
+    }*/
+    
+    @IBOutlet weak var operationsDisplay: UITextView!
+    
     @IBAction func performOperations(_ sender: UIButton) {
+    
+        print(sender.currentTitle!)
         
         switch sender.currentTitle! {
             case "+", "-", "*", "/":
                 guard let operand = extractOperandFrom(text: displayScreen.text) else { return }
                 basicCalculatorBrain.performOperation(operand, sender.currentTitle!)
-                displayScreen.text = displayScreen.text! + sender.currentTitle!
+                desc = desc + sender.currentTitle!
+                operationsDisplay.text = desc
+                displayScreen.text = ""
+                isResultPending = true
                 isUserTyping = false
                 firstDecimal = true
             case "AC":
                 isUserTyping = false
                 firstDecimal = true
                 displayScreen.text = ""
-            
+                operationsDisplay.text = ""
+                basicCalculatorBrain.result = 0
+                desc = ""
             case "√":
-//                guard let operand = extractOperandFrom(text: displayScreen.text) else { return }
-//                basicCalculatorBrain.performOperation(operand, sender.currentTitle!)
-                let operand = displayScreen.text!
+                guard let operand = extractOperandFrom(text: displayScreen.text) else { return }
                 basicCalculatorBrain.performOperation(operand, sender.currentTitle!)
                 displayScreen.text = String(sqrt(Double(operand)!))
-                
+                desc = "√("+desc+")"
+                operationsDisplay.text = desc
                 isUserTyping = false
                 firstDecimal = false
-/*        case "<-":
+            
+                isResultPending = false
+                basicCalculatorBrain.result = 0
+            
+            
+        case "<-":
             if var text = displayScreen.text {
                 if(text != "") {
                     let index = text.index(before: text.endIndex)
@@ -52,14 +82,26 @@ class ViewController: UIViewController {
                     }
                 }
             }
-  */        case "=":
+          case "=":
                 guard let operand = extractOperandFrom(text: displayScreen.text) else { return }
-                basicCalculatorBrain.performOperation(operand, sender.currentTitle!)
-            
-                if(basicCalculatorBrain.result != nil) {
-                    displayScreen.text = String(basicCalculatorBrain.result!)
-                    firstDecimal=false
+                print(isResultPending)
+                if(!isResultPending){
+                    displayScreen.text = operand
                 }
+                else{
+                    basicCalculatorBrain.performOperation(operand, sender.currentTitle!)
+                    if(basicCalculatorBrain.result != nil) {
+                        displayScreen.text = String(basicCalculatorBrain.result!)
+                        operationsDisplay.text = desc + "+"
+                        firstDecimal=false
+                    }
+                }
+            isResultPending = false
+                isUserTyping = false
+               // firstDecimal = true
+                //displayScreen.text = ""
+                //operationsDisplay.text = ""
+                basicCalculatorBrain.result = 0
             default:
                 break
         }
@@ -78,6 +120,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchDigit(_ sender: UIButton) {
+        if(!isResultPending){
+            isResultPending = true
+            desc = ""
+        }
         if(sender.currentTitle! == "π") {
             displayScreen.text = String(Double.pi)
         }
@@ -101,5 +147,6 @@ class ViewController: UIViewController {
         else {
                 displayScreen.text = displayScreen.text! + sender.currentTitle!
         }
+            desc = desc + sender.currentTitle!
     }
 }

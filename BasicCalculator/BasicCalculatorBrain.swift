@@ -49,6 +49,10 @@ struct BasicCalculatorBrain {
             accumulator = Double(operand)
             operation = symbol
         case "=":
+            if( accumulator == nil ) {
+                accumulator = Double(operand)
+            }
+            else{
                 if(operation == "+") {
                     accumulator = accumulator! + Double(operand)!
                     print(accumulator!)
@@ -62,14 +66,21 @@ struct BasicCalculatorBrain {
                     accumulator = accumulator! / Double(operand)!
                     print(accumulator!)
                 }
-                accumulator = Double(round(10000000000000*accumulator!)/10000000000000)
-        default:
+                else{
+                    accumulator = Double(operand)
+                }
+              accumulator = Double(round(10000000000000*accumulator!)/10000000000000)
+            }
+    default:
             break
         }
     }
     var result: Double? {
         get{
             return accumulator
+        }
+        set{
+            accumulator = nil
         }
     }
 }
