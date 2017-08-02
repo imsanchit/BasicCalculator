@@ -11,8 +11,19 @@ import Foundation
 struct BasicCalculatorBrain {
     private var accumulator: Double?
     private var operation: String?
+    private var storedOperations = [Double]()
     
-
+    mutating func undo(){
+        storedOperations.removeLast()
+}
+    var memory: Double?
+    func MemoryValue() -> (Double) {
+        return memory ?? 0.0
+    }
+    
+    mutating func storeMemory(value: Double?){
+        memory = value 
+    }
     
     mutating func performOperation(_ operand: String , _ symbol: String) {
     
@@ -23,24 +34,28 @@ struct BasicCalculatorBrain {
             }
             accumulator = Double(operand)
             operation = symbol
+            storedOperations.append(accumulator!)
         case "-":
             if let acc = accumulator {
                 accumulator = acc - Double(operand)!
             }
             accumulator = Double(operand)
             operation = symbol
+            storedOperations.append(accumulator!)
         case "/":
             if let acc = accumulator {
                 accumulator = acc / Double(operand)!
             }
             accumulator = Double(operand)
             operation = symbol
+            storedOperations.append(accumulator!)
         case "*":
             if let acc = accumulator {
                 accumulator = acc * Double(operand)!
             }
             accumulator = Double(operand)
             operation = symbol
+            storedOperations.append(accumulator!)
         
         case "√":
             if let acc = accumulator {
@@ -48,9 +63,25 @@ struct BasicCalculatorBrain {
             }
             accumulator = Double(operand)
             operation = symbol
+            storedOperations.append(accumulator!)
+        case "^2":
+            if let acc = accumulator {
+                accumulator = acc / Double(operand)!
+            }
+            accumulator = Double(operand)
+            operation = symbol
+            storedOperations.append(accumulator!)
+        case "cos":
+            if let acc = accumulator {
+                accumulator = acc / Double(operand)!
+            }
+            accumulator = Double(operand)
+            operation = symbol
+            storedOperations.append(accumulator!)
         case "=":
             if( accumulator == nil ) {
                 accumulator = Double(operand)
+                storedOperations.append(accumulator!)
             }
             else{
                 if(operation == "+") {
@@ -70,6 +101,7 @@ struct BasicCalculatorBrain {
                     accumulator = Double(operand)
                 }
               accumulator = Double(round(10000000000000*accumulator!)/10000000000000)
+                storedOperations.append(accumulator!)
             }
     default:
             break

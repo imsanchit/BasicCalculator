@@ -53,7 +53,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                                         <state key="normal" title="M"/>
                                                         <connections>
-                                                            <action selector="performOperations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="53S-XD-jZ0"/>
+                                                            <action selector="touchDigit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ye1-Hi-N6D"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAh-S8-c8D">
@@ -61,7 +61,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                                         <state key="normal" title="~M"/>
                                                         <connections>
-                                                            <action selector="performOperations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AJ9-cA-ho4"/>
+                                                            <action selector="touchDigit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fUU-KJ-wQW"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2h-W5-j7w">
