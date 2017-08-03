@@ -15,19 +15,19 @@ struct BasicCalculatorBrain {
     
     mutating func undo(){
         storedOperations.removeLast()
-}
+    }
     var memory: Double?
     func MemoryValue() -> (Double) {
         return memory ?? 0.0
     }
     
     mutating func storeMemory(value: Double?){
-        memory = value 
+        memory = value
     }
     
     mutating func performOperation(_ operand: String , _ symbol: String) {
-    
-    switch symbol {
+        
+        switch symbol {
         case "+":
             if let acc = accumulator {
                 accumulator = acc + Double(operand)!
@@ -56,7 +56,7 @@ struct BasicCalculatorBrain {
             accumulator = Double(operand)
             operation = symbol
             storedOperations.append(accumulator!)
-        
+            
         case "√":
             if let acc = accumulator {
                 accumulator = acc / Double(operand)!
@@ -71,7 +71,7 @@ struct BasicCalculatorBrain {
             accumulator = Double(operand)
             operation = symbol
             storedOperations.append(accumulator!)
-        case "cos":
+        case "sin":
             if let acc = accumulator {
                 accumulator = acc / Double(operand)!
             }
@@ -100,10 +100,10 @@ struct BasicCalculatorBrain {
                 else{
                     accumulator = Double(operand)
                 }
-              accumulator = Double(round(10000000000000*accumulator!)/10000000000000)
+                accumulator = Double(round(10000000000000*accumulator!)/10000000000000)
                 storedOperations.append(accumulator!)
             }
-    default:
+        default:
             break
         }
     }
