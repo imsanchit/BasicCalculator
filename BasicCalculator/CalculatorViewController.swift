@@ -341,17 +341,18 @@ class CalculatorViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /*  var destinationViewContoller = segue.destination
+          var destinationViewContoller = segue.destination
          if let navigationController = destinationViewContoller as? UINavigationController{
-         destinationViewContoller = navigationController.visibleViewController ??  destinationViewContoller
-         }
-         if let graphViewController =  destinationViewContoller as? GraphViewController {
+            destinationViewContoller = navigationController.visibleViewController ??  destinationViewContoller
+            }
+        // if let graphViewController =  destinationViewContoller as? GraphViewController {
          //                let identifier = segue.identifier {
          //              let expression = emotionalFaces[identifier]{
          //        let sinView = SineView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
          
-         graphViewController.drawGraph()
-         graphViewController.navigationItem.title = (sender as? UIButton)?.currentTitle
-         }
-         */}
+       //     graphViewController.drawGraph()
+         //   graphViewController.navigationItem.title = (sender as? UIButton)?.currentTitle
+          //  }
+        }
+    
 }

@@ -10,50 +10,36 @@ import UIKit
 import Foundation
 
 class GraphViewController: UIViewController {
+    @IBOutlet weak var graphView: GraphView! {
+        didSet{
+            let handler = #selector(GraphView.changeScale(byReactingTo:))
+            let pinchRecogniser = UIPinchGestureRecognizer(target: graphView, action: handler)
+            graphView.addGestureRecognizer(pinchRecogniser)
 
-public func drawGraph(){
-
-    print("Hello People begin")
-/*let graphWidth: CGFloat = 0.8
-    let amplitude: CGFloat = 0.3
-    
-    
-    let rect = CGRect(x: 0, y: 0, width: 200, height: 200)
-    
-    let width = rect.width
-    let height = rect.height
-    
-    let origin = CGPoint(x: width * (1 - graphWidth) / 2, y: height * 0.50)
-    
-    let path = UIBezierPath()
-    path.move(to: origin)
-    
-    for angle in stride(from: 5.0, through: 360.0, by: 5.0) {
-    let x = origin.x + CGFloat(angle/360.0) * width * graphWidth
-    let y = origin.y - CGFloat(cos(angle/180.0 * Double.pi)) * height * amplitude
-    path.addLine(to: CGPoint(x: x, y: y))
+            let panRecogniser = UIPanGestureRecognizer(target: self, action: #selector(moveGraph(byReactingTo:)))
+            graphView.addGestureRecognizer(panRecogniser)
+            
+            let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(moveOrigin(byReactingTo:)))
+            tapRecogniser.numberOfTapsRequired = 2
+            graphView.addGestureRecognizer(tapRecogniser)
+        }
     }
     
-    UIColor.black.setStroke()
-    path.stroke()
-  */
-        let sinView = SineView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-    //sinView.draw(CGRect(x: 0, y: 0, width: 200, height: 200))
-       sinView.backgroundColor = .black
-    print("Hello People end")
- 
+    func moveGraph(byReactingTo panRecogniser : UIPanGestureRecognizer){
+        print("Pan pressed")
+        let newPoint = panRecogniser.translation(in: graphView)
+        graphView?.changeOrigin(newPoint , true)
+        print(newPoint.x)
+        print(newPoint.y)
     }
-
     
-   // CGContextSetStrokeColorWithColor: invalid context 0x0. If you want to see the backtrace, please set CG_CONTEXT_SHOW_BACKTRACE environmental variable.
-    
-    
-//
-  // public func drawGraph(){
- 
-    //    let sinView = SineView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-     //   sinView.backgroundColor = .black
-      //
-    //}
+    func moveOrigin(byReactingTo tapRecogniser : UITapGestureRecognizer){
+        print("Tap pressed")
+        if tapRecogniser.state == .ended {
+            let pointOfTouch = tapRecogniser.location(ofTouch: 0, in: graphView)
+            graphView?.changeOrigin(pointOfTouch , false)
+            print(pointOfTouch.x)
+            print(pointOfTouch.y)
+        }
+    }
 }
-

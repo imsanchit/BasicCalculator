@@ -364,13 +364,28 @@
                     <view key="view" contentMode="scaleToFill" id="EWO-Ld-e5y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32p-Dr-4Jx" customClass="GraphView" customModule="BasicCalculator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bF4-YT-AnX" firstAttribute="top" secondItem="32p-Dr-4Jx" secondAttribute="bottom" id="7z8-1A-GXQ"/>
+                            <constraint firstItem="32p-Dr-4Jx" firstAttribute="top" secondItem="HhC-vY-0bv" secondAttribute="bottom" id="RYM-tb-TTE"/>
+                            <constraint firstItem="32p-Dr-4Jx" firstAttribute="leading" secondItem="EWO-Ld-e5y" secondAttribute="leading" id="Syd-Py-WCz"/>
+                            <constraint firstAttribute="trailing" secondItem="32p-Dr-4Jx" secondAttribute="trailing" id="nNk-b3-jwv"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="NUK-R2-Y1R"/>
+                    <navigationItem key="navigationItem" id="gJj-nZ-d9X"/>
+                    <connections>
+                        <outlet property="graphView" destination="32p-Dr-4Jx" id="Eay-jE-PgL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxT-SU-yQ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1425" y="457"/>
+            <point key="canvasLocation" x="1423.125" y="456.25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tz7-0B-rhy">
