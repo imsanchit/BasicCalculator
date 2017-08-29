@@ -18,6 +18,15 @@ class GraphView: UIView {
     private var graphCenterY : CGFloat! { didSet { setNeedsDisplay() } }
     private var shouldChangeOrigin = true
     
+    
+    var sineCoff: CGFloat! { didSet { setNeedsDisplay() } }
+    var sineOff: CGFloat! { didSet { setNeedsDisplay() } }
+    var eqnCoff: CGFloat! { didSet { setNeedsDisplay() } }
+    var eqnOff: CGFloat! { didSet { setNeedsDisplay() } }
+    
+    
+    
+    
     @IBInspectable
     var scale : CGFloat = 0.9 { didSet { setNeedsDisplay() } }
 
@@ -34,7 +43,6 @@ class GraphView: UIView {
     
    
        func changeScale(byReactingTo pinchRecogniser : UIPinchGestureRecognizer){
-        print("Zooming starts")
         switch pinchRecogniser.state {
         case .changed , .ended:
             print(pinchRecogniser.scale)
@@ -81,9 +89,6 @@ class GraphView: UIView {
         let path = UIBezierPath()
         path.lineWidth = lineWidth
      
-//        path.move(to: CGPoint(x:graphCenterX+(boundary*scale)/4 , y:graphCenterY-(boundary*scale)/4))
-//        path.addLine(to: CGPoint(x:graphCenterX-(boundary*scale)/4 , y:graphCenterY+(boundary*scale)/4))
-    
         path.move(to: CGPoint(x:graphCenterX+(boundary*scale/4) , y:graphCenterY-((boundary*cofficient*scale)/4)+offset))
         path.addLine(to: CGPoint(x:graphCenterX-(boundary*scale/4) , y:graphCenterY+((boundary*cofficient*scale)/4)+offset))
         return path
@@ -116,7 +121,7 @@ class GraphView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-     /*   drawAxes()
+        drawAxes()
         equationColor.set()
         var boundary: CGFloat
         if(self.bounds.height<self.bounds.width) {
@@ -124,20 +129,13 @@ class GraphView: UIView {
         }
         else {
             boundary = self.bounds.width
-        }//2/3 50
-        print("Came here")
-        if offset != nil &&  cofficient != nil {
-            print("enter here")
-            drawEquation(boundary,cofficient,offset).stroke()
-            print("exit here")
-            
         }
-//        drawEquation(boundary,2/3,50).stroke()
-//        drawEquation(boundary,values.cofficient,values.offset).stroke()
-        if cofficient != nil && offset != nil {
-            drawSineGraph(boundary,self.cofficient,self.offset).stroke()
+        if sineCoff != nil &&  sineOff != nil {
+            drawSineGraph(boundary,sineCoff,sineOff).stroke()
+
         }
-//        drawSineGraph(boundary,values.cofficient,values.offset).stroke()
-         */
+        if eqnCoff != nil &&  eqnOff != nil {
+            drawEquation(boundary,eqnCoff,eqnOff).stroke()
+        }
     }
 }

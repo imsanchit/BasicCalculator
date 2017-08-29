@@ -354,15 +354,6 @@ class CalculatorViewController: UIViewController , UISplitViewControllerDelegate
             }
         //}
     }
-//    ["*", "+"]  x*5+6
-//    [0.0, 3.0, 6.0]
-//    ["+"]
-//    [0.0, 3.0]
-
-//    ["sin"] sin(x)
-//    [0.0]
-//    ["+", "sin"] sin(x+3)
-//    [0.0, 3.0]
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -415,6 +406,8 @@ class CalculatorViewController: UIViewController , UISplitViewControllerDelegate
                 }
                 graphViewController.navigationItem.title = (sender as? UIButton)?.currentTitle
             }
+            equationOperand.removeAll()
+            equationOperator.removeAll()
         }
     }
 }

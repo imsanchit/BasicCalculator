@@ -38,11 +38,9 @@ class GraphViewController: UIViewController {
             graphView.addGestureRecognizer(tapRecogniser)
             
             if sine {
-                print("Calling sine")
                 drawSine(coff, off)
             }
             else if eqn {
-                print("calling eqn")
                 drawEquation(coff , off)
             }
         }
@@ -50,47 +48,29 @@ class GraphViewController: UIViewController {
     
     public func drawEquation(_ cofficient: CGFloat,_ offset: CGFloat) {
         
-        print("calling eqn 1")
         sine = false
         eqn = true
         coff = cofficient
         off = offset
         if graphView != nil {
-            print("calling eqn 2")
-            graphView.drawAxes()
-            graphView.equationColor.set()
-            var boundary: CGFloat
-            if(graphView.bounds.height < graphView.bounds.width) {
-                boundary = graphView.bounds.height
-            }
-            else {
-                boundary = graphView.bounds.width
-            }
-            graphView.drawEquation(boundary,cofficient,offset).stroke()
+            graphView.eqnCoff = cofficient
+            graphView.eqnOff = offset
         }
     }
 
     public func drawSine(_ cofficient: CGFloat,_ offset: CGFloat) {
+        
         sine = true
         eqn = false
         coff = cofficient
         off = offset
         if graphView != nil {
-            graphView.drawAxes()
-            graphView.equationColor.set()
-            var boundary: CGFloat
-            if(graphView.bounds.height < graphView.bounds.width) {
-                boundary = graphView.bounds.height
-            }
-            else {
-                boundary = graphView.bounds.width
-            }
-            graphView.drawSineGraph(boundary,cofficient,offset).stroke()
+            graphView.sineCoff = cofficient
+            graphView.sineOff = offset
         }
     }
 
     func moveGraph(byReactingTo panRecogniser : UIPanGestureRecognizer){
-        print("Pan pressed")
         let newPoint = panRecogniser.translation(in: graphView)
         graphView?.changeOrigin(newPoint , true)
         print(newPoint.x)
@@ -98,7 +78,6 @@ class GraphViewController: UIViewController {
     }
     
     func moveOrigin(byReactingTo tapRecogniser : UITapGestureRecognizer){
-        print("Tap pressed")
         if tapRecogniser.state == .ended {
             let pointOfTouch = tapRecogniser.location(ofTouch: 0, in: graphView)
             graphView?.changeOrigin(pointOfTouch , false)
