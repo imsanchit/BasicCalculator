@@ -8,7 +8,24 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+class CalculatorViewController: UIViewController , UISplitViewControllerDelegate {
+    
+    
+    fileprivate var collapseDetailViewController = true
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        splitViewController?.delegate = self
+        
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        return collapseDetailViewController
+    }
+
     
     @IBAction func evaluate(_ sender: UIButton) {
         print(equationOperator)
@@ -135,8 +152,7 @@ class CalculatorViewController: UIViewController {
             }
             isUserTyping = false
             basicCalculatorBrain.result = 0
-          //  print(equationOperand)
-            //print(equationOperator)
+
         }
         else {
             isEquation = true
@@ -338,21 +354,67 @@ class CalculatorViewController: UIViewController {
             }
         //}
     }
-    
+//    ["*", "+"]  x*5+6
+//    [0.0, 3.0, 6.0]
+//    ["+"]
+//    [0.0, 3.0]
+
+//    ["sin"] sin(x)
+//    [0.0]
+//    ["+", "sin"] sin(x+3)
+//    [0.0, 3.0]
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-          var destinationViewContoller = segue.destination
-         if let navigationController = destinationViewContoller as? UINavigationController{
-            destinationViewContoller = navigationController.visibleViewController ??  destinationViewContoller
-            }
-        // if let graphViewController =  destinationViewContoller as? GraphViewController {
-         //                let identifier = segue.identifier {
-         //              let expression = emotionalFaces[identifier]{
-         //        let sinView = SineView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-         
-       //     graphViewController.drawGraph()
-         //   graphViewController.navigationItem.title = (sender as? UIButton)?.currentTitle
-          //  }
+        
+        
+        
+        collapseDetailViewController = false
+        var destinationViewContoller = segue.destination
+        if let navigationController = destinationViewContoller as? UINavigationController{
+            destinationViewContoller = navigationController.visibleViewController ?? destinationViewContoller
         }
-    
+        destinationViewContoller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        destinationViewContoller.navigationItem.leftItemsSupplementBackButton = true
+        
+        
+        if let graphViewController = destinationViewContoller as? GraphViewController {
+            print(equationOperator)
+            print(equationOperand)
+            if(equationOperand.count > 0 && equationOperator.count > 0) {
+                if equationOperator[0] == "+"  ||  equationOperator[0] == "-" {
+                    if equationOperand.count > 1 {
+                        if equationOperator.count > 1 {
+                            if equationOperator[1] == "sin" {
+                                if(equationOperand[0]==0){
+                                    graphViewController.drawSine(1,CGFloat(equationOperand[1]))
+                                }
+                                else {
+                                    graphViewController.drawSine(CGFloat(equationOperand[0]),CGFloat(equationOperand[1]))
+                                }
+                            }
+                        }
+                        else {
+                            graphViewController.drawEquation(1,CGFloat(equationOperand[1]))
+                        }
+                    }
+                }
+                else if equationOperator[0] == "*"  ||  equationOperator[0] == "/" {
+                    if equationOperand.count > 1 {
+                        if equationOperator[1] == "+" {
+                            graphViewController.drawEquation(CGFloat(equationOperand[0]),CGFloat(equationOperand[1]))
+                        }
+                        else if equationOperator[1] == "-" {
+                            graphViewController.drawEquation(CGFloat(equationOperand[0]),-(CGFloat)(equationOperand[1]))
+                        }
+                    }
+                }
+                else if equationOperator[0] == "sin" {
+                    if equationOperand.count > 1 {
+                        graphViewController.drawSine(1,CGFloat(equationOperand[1]))
+                    }
+                }
+                graphViewController.navigationItem.title = (sender as? UIButton)?.currentTitle
+            }
+        }
+    }
 }

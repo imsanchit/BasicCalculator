@@ -23,6 +23,7 @@ class GraphView: UIView {
 
     @IBInspectable
     var axisColor : UIColor = UIColor.black  { didSet { setNeedsDisplay() } }
+    
 
     @IBInspectable
     var equationColor : UIColor = UIColor.blue  { didSet { setNeedsDisplay()
@@ -31,7 +32,8 @@ class GraphView: UIView {
     @IBInspectable
     var lineWidth : CGFloat = 5.0  { didSet { setNeedsDisplay() } }
     
-    func changeScale(byReactingTo pinchRecogniser : UIPinchGestureRecognizer){
+   
+       func changeScale(byReactingTo pinchRecogniser : UIPinchGestureRecognizer){
         print("Zooming starts")
         switch pinchRecogniser.state {
         case .changed , .ended:
@@ -60,18 +62,34 @@ class GraphView: UIView {
             return path
     }
 
-    private func drawEquation(_ boundary: CGFloat ,_ cofficient: CGFloat , _ offset: CGFloat) -> UIBezierPath{
+    public func drawSineGraph(_ boundary: CGFloat ,_ cofficient: CGFloat , _ offset: CGFloat) -> UIBezierPath{
         let path = UIBezierPath()
         path.lineWidth = lineWidth
-
-        path.move(to: CGPoint(x:graphCenterX+(boundary*scale)/4 , y:graphCenterY-(boundary*scale)/4))
-        path.addLine(to: CGPoint(x:graphCenterX-(boundary*scale)/4 , y:graphCenterY+(boundary*scale)/4))
-        
-        path.move(to: CGPoint(x:graphCenterX+(boundary*scale/4) , y:graphCenterY-((boundary*cofficient*scale)/4)+offset))
-        path.addLine(to: CGPoint(x:graphCenterX-(boundary*scale/4) , y:graphCenterY+((boundary*cofficient*scale)/4)+offset))
-
+        let width: CGFloat = (boundary*scale)/2
+        let height: CGFloat = (boundary*scale)/2
+                
+        path.move(to: CGPoint(x:graphCenterX , y:graphCenterY+offset))
+        for angle in stride(from: 5.0, through: 360.0, by: 5.0) {
+            let x = graphCenterX + (CGFloat(angle/360.0) * width * 0.8)
+            let y = graphCenterY - (CGFloat(sin(angle/180.0 * Double.pi)) * height * 0.3*cofficient)+offset
+            path.addLine(to: CGPoint(x: x, y: y))
+        }
         return path
     }
+    
+    public func drawEquation(_ boundary: CGFloat ,_ cofficient: CGFloat , _ offset: CGFloat) -> UIBezierPath{
+        let path = UIBezierPath()
+        path.lineWidth = lineWidth
+     
+//        path.move(to: CGPoint(x:graphCenterX+(boundary*scale)/4 , y:graphCenterY-(boundary*scale)/4))
+//        path.addLine(to: CGPoint(x:graphCenterX-(boundary*scale)/4 , y:graphCenterY+(boundary*scale)/4))
+    
+        path.move(to: CGPoint(x:graphCenterX+(boundary*scale/4) , y:graphCenterY-((boundary*cofficient*scale)/4)+offset))
+        path.addLine(to: CGPoint(x:graphCenterX-(boundary*scale/4) , y:graphCenterY+((boundary*cofficient*scale)/4)+offset))
+        return path
+    }
+    
+    
     
     public func changeOrigin(_ origin : CGPoint ,_ changeOrigin : Bool){
         graphCenterX = origin.x
@@ -98,7 +116,7 @@ class GraphView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        drawAxes()
+     /*   drawAxes()
         equationColor.set()
         var boundary: CGFloat
         if(self.bounds.height<self.bounds.width) {
@@ -106,7 +124,20 @@ class GraphView: UIView {
         }
         else {
             boundary = self.bounds.width
+        }//2/3 50
+        print("Came here")
+        if offset != nil &&  cofficient != nil {
+            print("enter here")
+            drawEquation(boundary,cofficient,offset).stroke()
+            print("exit here")
+            
         }
-        drawEquation(boundary,1/3,50).stroke()
+//        drawEquation(boundary,2/3,50).stroke()
+//        drawEquation(boundary,values.cofficient,values.offset).stroke()
+        if cofficient != nil && offset != nil {
+            drawSineGraph(boundary,self.cofficient,self.offset).stroke()
+        }
+//        drawSineGraph(boundary,values.cofficient,values.offset).stroke()
+         */
     }
 }
